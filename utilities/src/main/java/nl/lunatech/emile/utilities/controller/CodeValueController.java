@@ -29,6 +29,10 @@ public class CodeValueController {
 	public CodeValue findByCode(@RequestParam(value="code", defaultValue="nn") String code) {
 		return repository.findByCode(code);
 	}
+	@GetMapping("/retrieveContaining")
+	public List<CodeValue> findByCodeContaining(@RequestParam(value="code", defaultValue="nn") String code) {
+		return repository.findByCodeContaining(code);
+	}
 	@GetMapping("/retrieveAll")
 	public List<CodeValue> findAll() {
 		return repository.findAll();

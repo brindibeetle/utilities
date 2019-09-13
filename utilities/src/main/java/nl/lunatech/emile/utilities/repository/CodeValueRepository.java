@@ -18,4 +18,7 @@ public interface CodeValueRepository extends JpaRepository<CodeValue, String>{
 	@Query("select c from CodeValue c")
 	List<CodeValue> findAll();
 
+	@Query("select c from CodeValue c where c.code like CONCAT('%', ?1, '%')")
+	List<CodeValue> findByCodeContaining(String code);
+
 }
