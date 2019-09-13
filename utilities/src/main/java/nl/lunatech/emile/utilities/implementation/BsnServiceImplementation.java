@@ -14,9 +14,17 @@ public class BsnServiceImplementation implements BsnService {
 		String bsn1 = bsn.trim();
 
 		if (bsn1.length() < 8)
-			return new BsnCheckReturn(2, "Lengte < 8");
+			return new BsnCheckReturn(2, "Length < 8");
+		if (bsn1.length() > 9)
+			return new BsnCheckReturn(2, "Length > 9");
 		if (bsn1.length() == 8)
 			bsn1 = "0" + bsn1;
+
+		Integer bsn2 = Integer.valueOf(bsn1);
+		if (bsn2 == 0)
+			return new BsnCheckReturn(3, "Not numeric");
+		if (bsn2 < 10000000)
+			return new BsnCheckReturn(3, "Too small");
 
 		int checksum = 0;
 		int checkproduct = 10;
@@ -29,7 +37,6 @@ public class BsnServiceImplementation implements BsnService {
 			return new BsnCheckReturn(0, "Looks okay");
 		else
 			return new BsnCheckReturn(1, "Nope");
-		//		(9 × A) + (8 × B) + (7 × C) + (6 × D) + (5 × E) + (4 × F) + (3 × G) + (2 × H) + (-1 × I) is divisable by 11
 	}
 
 }
